@@ -28,7 +28,7 @@ class RakutenKeibaCore:
             settings = json.load(json_file)
             return settings
 
-    def WaitPageSteady(self, by, wait_element_id):
+    def WaitPageSteady(self, wait_element_id, by = By.ID):
         try:
             WebDriverWait(self.__browser, self.__delay).until(EC.presence_of_element_located((by, wait_element_id)))
             # print("Page is ready!")
@@ -45,7 +45,7 @@ class RakutenKeibaCore:
         print("Browser quit")
     
     def GoLoginPage(self):
-        btn_login = self.__browser.find_element_by_xpath("//span[contains(text(), '¤Jª÷')][@class='siteheader_actionlist_label']")
+        btn_login = self.__browser.find_element_by_xpath("//span[contains(text(), 'ï¿½Jï¿½ï¿½')][@class='siteheader_actionlist_label']")
         print(btn_login.text)
         btn_login.click()
         self.WaitPageSteady('loginInner_u')

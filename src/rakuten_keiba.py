@@ -1,10 +1,9 @@
-import rakuten_search_lib as RSL
+import rakuten_keiba_lib as RKL
 
-rsc = RSL.RakutenSearchCore()
-rsc.Index()
-rsc.GoLoginPage()
-#rsc.Login()
-#rsc.Search()
-rsc.Quit()
+rkc = RKL.RakutenKeibaCore()
+rkc.Index()
+rkc.GoLoginPage()
+#rkc.Login()
+rkc.Quit()
 
-print("rakuten search end")
+print("rakuten keiba end")
