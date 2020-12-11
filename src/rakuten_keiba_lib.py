@@ -71,7 +71,7 @@ class RakutenKeibaCore:
         edit_password.send_keys(self.__settings["password_small"])
         btn_ok = self.__browser.find_element_by_class_name('credit')
         btn_ok.click()
-        self.WaitPageSteady("入金指示結果", By.LINK_TEXT)
+        self.WaitPageSteady("toBetting", By.CLASS_NAME)
         print("ChargeMoney OK!")
 
         
