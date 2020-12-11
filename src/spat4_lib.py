@@ -10,9 +10,9 @@ import random
 import time
 import os
 
-class RakutenKeibaCore:
+class SPAT4Core:
     def __init__(self):
-        print("RakutenKeibaCore start")
+        print("SPAT4Core start")
         chop = webdriver.ChromeOptions()
         chop.add_argument("--no-sandbox")
         chop.add_argument("--disable-setuid-sandbox")
@@ -42,8 +42,8 @@ class RakutenKeibaCore:
             exit()
     
     def Index(self):
-        self.__browser.get('https://grp02.id.rakuten.co.jp/rms/nid/loginfwd?__event=LOGIN&service_id=n58&return_url=%2Fbank%2Fdeposit%2F%3Fl-id%3Dkeiba_header_deposit')
-        self.WaitPageSteady('loginInner_u')
+        self.__browser.get('https://www.spat4.jp/keiba/pc')
+        self.WaitPageSteady('MEMBERNUMR')
         print("Loading index OK!")
 
     def Quit(self):
@@ -51,28 +51,32 @@ class RakutenKeibaCore:
         print("Browser quit")
 
     def Login(self):
-        edit_user = self.__browser.find_element_by_id("loginInner_u")
-        edit_password = self.__browser.find_element_by_id("loginInner_p")
-        edit_user.send_keys(self.__settings["account"])
-        edit_password.send_keys(self.__settings["password"])
+        edit_user = self.__browser.find_element_by_id("MEMBERNUMR")
+        edit_password = self.__browser.find_element_by_id("MEMBERIDR")
+        edit_user.send_keys(self.__settings["spat4_account"])
+        edit_password.send_keys(self.__settings["spat4_password"])
 
-        btn_login = self.__browser.find_element_by_name("submit")
+        btn_login = self.__browser.find_element_by_class_name("btn")
         btn_login.click()
-        self.WaitPageSteady('confirm', By.CLASS_NAME)
+        self.WaitPageSteady('USESTATUSR', By.ID)
         print("Login OK!")
 
     def ChargeMoney(self):
-        input_price = self.__browser.find_element_by_id("depositingInputPrice")
+        # Go to charge page
+        self.__browser.get('https://www.spat4.jp/keiba/pc?HANDLERR=P600S')
+        self.WaitPageSteady('ENTERR')
+
+        input_price = self.__browser.find_element_by_id("ENTERR")
         input_price.send_keys('100')
-        btn_confirm = self.__browser.find_element_by_class_name('confirm')
+        btn_confirm = self.__browser.find_element_by_class_name('w120px')
         btn_confirm.click()
 
-        self.WaitPageSteady('definedNumber', By.CLASS_NAME)
-        edit_password = self.__browser.find_element_by_class_name('definedNumber')
+        self.WaitPageSteady('MEMBERPASSR', By.ID)
+        edit_password = self.__browser.find_element_by_id('MEMBERPASSR')
         edit_password.send_keys(self.__settings["password_small"])
-        btn_ok = self.__browser.find_element_by_class_name('credit')
+        btn_ok = self.__browser.find_element_by_name('EXEC')
         btn_ok.click()
-        self.WaitPageSteady("toBetting", By.CLASS_NAME)
+        #self.WaitPageSteady("toBetting", By.CLASS_NAME)
         print("ChargeMoney OK!")
 
         
