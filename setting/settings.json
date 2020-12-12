@@ -1,4 +1,8 @@
 {
     "account": "",
-    "password": "" 
+    "password": "", 
+    "password_small": "",
+
+    "spat4_account": "",
+    "spat4_password": ""
 }

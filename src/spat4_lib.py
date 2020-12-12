@@ -58,6 +58,11 @@ class SPAT4Core:
 
         btn_login = self.__browser.find_element_by_class_name("btn")
         btn_login.click()
+
+        self.WaitPageSteady('goKaisai', By.ID)
+        btn_enter = self.__browser.find_element_by_id("goKaisai")
+        btn_enter.click()
+
         self.WaitPageSteady('USESTATUSR', By.ID)
         print("Login OK!")
 
@@ -76,7 +81,7 @@ class SPAT4Core:
         edit_password.send_keys(self.__settings["password_small"])
         btn_ok = self.__browser.find_element_by_name('EXEC')
         btn_ok.click()
-        #self.WaitPageSteady("toBetting", By.CLASS_NAME)
+        self.WaitPageSteady("content", By.ID)
         print("ChargeMoney OK!")
 
         
