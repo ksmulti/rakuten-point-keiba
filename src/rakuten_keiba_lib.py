@@ -7,7 +7,7 @@ import os
 
 class RakutenKeibaCore(CommonCore):
     def __init__(self):
-        self._name = "RakutenKeibaCore"
+        self._name = __name__
         CommonCore.__init__(self)
 
     def Index(self):

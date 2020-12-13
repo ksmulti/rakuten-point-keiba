@@ -41,6 +41,7 @@ class CommonCore:
         try:
             WebDriverWait(self._browser, self._delay).until(EC.presence_of_element_located((by, wait_element_id)))
             print(wait_element_id + " is ready!")
+            time.sleep(1)
         except TimeoutException:
             print("Can not find " + wait_element_id + "!!!")
             self.Quit()

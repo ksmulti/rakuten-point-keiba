@@ -7,7 +7,7 @@ import os
 
 class SPAT4Core(CommonCore):
     def __init__(self):
-        self._name = "SPAT4Core"
+        self._name = __name__
         CommonCore.__init__(self)
 
     def Index(self):
