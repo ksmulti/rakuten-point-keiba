@@ -15,6 +15,7 @@ class CommonCore:
     _browser = None
     _delay = None
     _settings = None
+    _main_window_handle = None
 
     def __init__(self):
         print(self._name + " start")
@@ -31,6 +32,7 @@ class CommonCore:
         
         self._delay = 10
         self._settings = self.LoadSettings()
+        self._main_window_handle = self._browser.current_window_handle
 
     def LoadSettings(self):
         with open('../setting/settings.json', encoding='utf-8') as json_file:
@@ -42,6 +44,22 @@ class CommonCore:
             WebDriverWait(self._browser, self._delay).until(EC.presence_of_element_located((by, wait_element_id)))
             print(wait_element_id + " is ready!")
             time.sleep(1)
+            if by == By.ID:
+                return self._browser.find_element_by_id(wait_element_id)
+            elif by == By.CLASS_NAME:
+                return self._browser.find_element_by_class_name(wait_element_id)
+            elif by == By.NAME:
+                return self._browser.find_element_by_name(wait_element_id)
+            elif by == By.LINK_TEXT:
+                return self._browser.find_element_by_link_text(wait_element_id)
+            elif by == By.PARTIAL_LINK_TEXT:
+                return self._browser.find_element_by_partial_link_text(wait_element_id)
+            elif by == By.TAG_NAME:
+                return self._browser.find_element_by_tag_name(wait_element_id)
+            elif by == By.XPATH:
+                return self._browser.find_element_by_xpath(wait_element_id)
+            else:
+                return None
         except TimeoutException:
             print("Can not find " + wait_element_id + "!!!")
             self.Quit()
@@ -50,3 +68,12 @@ class CommonCore:
     def Quit(self):
         self._browser.quit()
         print("Browser quit")
+
+    def SwitchToPopupWindow(self):
+        signin_window_handle = None
+        while not signin_window_handle:
+            for handle in self._browser.window_handles:
+                if handle != self._main_window_handle:
+                    signin_window_handle = handle
+                    break
+        self._browser.switch_to.window(signin_window_handle)
