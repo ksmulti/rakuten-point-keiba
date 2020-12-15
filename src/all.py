@@ -1,6 +1,7 @@
 import rakuten_keiba_lib as RKL
 import spat4_lib
 import odds_park_lib
+import keirin_jp_lib
 
 rkc = RKL.RakutenKeibaCore()
 rkc.Index()
@@ -22,3 +23,10 @@ opc.Login()
 opc.ChargeMoney()
 opc.Quit()
 print("odds park end")
+
+kjpc = keirin_jp_lib.KeirinJPCore()
+kjpc.Index()
+kjpc.Login()
+kjpc.ChargeMoney()
+kjpc.Quit()
+print("keirin jp end")
