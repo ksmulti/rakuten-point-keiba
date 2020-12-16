@@ -4,6 +4,6 @@ brc = boat_race_lib.BoatRaceCore()
 brc.Index()
 brc.Login()
 brc.ChargeMoney()
-#brc.Quit()
+brc.Quit()
 
 print("boat race end")

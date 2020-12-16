@@ -41,8 +41,11 @@ class BoatRaceCore(CommonCore):
         edit_password = self.WaitPageSteady('chargeBetPassword')
         edit_password.send_keys(self._settings["boat_race_pin_vote"])
         btn_confirm = self.WaitPageSteady('executeCharge')
-        #btn_confirm.click()
+        btn_confirm.click()
 
-        #self.WaitPageSteady("UNQ_orlabel_8", By.ID)
+        btn_confirm = self.WaitPageSteady("ok", By.ID)
+        btn_confirm.click()
+
+        self.WaitPageSteady("payment", By.ID)
         print("ChargeMoney OK!")
 
