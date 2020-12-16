@@ -2,6 +2,7 @@ import rakuten_keiba_lib as RKL
 import spat4_lib
 import odds_park_lib
 import keirin_jp_lib
+import boat_race_lib
 
 rkc = RKL.RakutenKeibaCore()
 rkc.Index()
@@ -30,3 +31,10 @@ kjpc.Login()
 kjpc.ChargeMoney()
 kjpc.Quit()
 print("keirin jp end")
+
+brc = boat_race_lib.BoatRaceCore()
+brc.Index()
+brc.Login()
+brc.ChargeMoney()
+brc.Quit()
+print("boat race end")
