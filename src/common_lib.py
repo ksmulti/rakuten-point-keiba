@@ -9,6 +9,7 @@ from webdriver_manager.utils import ChromeType
 import random
 import time
 import os
+from PIL import Image
 
 class CommonCore:
     _name = "CommonCore"
@@ -39,7 +40,7 @@ class CommonCore:
             settings = json.load(json_file)
             return settings
 
-    def WaitPageSteady(self, wait_element_id, by = By.ID):
+    def WaitPageSteady(self, wait_element_id, by = By.ID, quit_timeout = True):
         try:
             WebDriverWait(self._browser, self._delay).until(EC.presence_of_element_located((by, wait_element_id)))
             print(wait_element_id + " is ready!")
@@ -62,8 +63,9 @@ class CommonCore:
                 return None
         except TimeoutException:
             print("Can not find " + wait_element_id + "!!!")
-            self.Quit()
-            exit()
+            if quit_timeout:
+                self.Quit()
+                exit()
 
     def Quit(self):
         self._browser.quit()
@@ -77,3 +79,22 @@ class CommonCore:
                     signin_window_handle = handle
                     break
         self._browser.switch_to.window(signin_window_handle)
+
+    def get_captcha(self, element, path):
+        # now that we have the preliminary stuff out of the way time to get that image :D
+        location = element.location
+        size = element.size
+        # saves screenshot of entire page
+        self._browser.save_screenshot(path)
+
+        # uses PIL library to open image in memory
+        image = Image.open(path)
+
+        left = location['x']
+        top = location['y']
+        right = location['x'] + size['width']
+        bottom = location['y'] + size['height']
+
+        image = image.crop((left, top, right, bottom))  # defines crop points
+        image.save(path, 'png')  # saves new cropped image
+

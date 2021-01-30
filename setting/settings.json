@@ -4,5 +4,20 @@
     "password_small": "",
 
     "spat4_account": "",
-    "spat4_password": ""
+    "spat4_password": "",
+
+    "odds_park_account": "",
+    "odds_park_password": "",
+
+    "keirin_jp_account": "",
+    "keirin_jp_password": "",
+
+    "boat_race_account": "",
+    "boat_race_password": "",
+    "boat_race_pin_login": "",
+    "boat_race_pin_vote": "",
+
+    "eshinbun_account": "",
+    "eshinbun_password": "",
+    "eshinbun_pin": ""
 }
