@@ -36,7 +36,7 @@ class CommonCore:
         self._main_window_handle = self._browser.current_window_handle
 
     def LoadSettings(self):
-        with open('../setting/settings.json', encoding='utf-8') as json_file:
+        with open('./setting/settings.json', encoding='utf-8') as json_file:
             settings = json.load(json_file)
             return settings
 
