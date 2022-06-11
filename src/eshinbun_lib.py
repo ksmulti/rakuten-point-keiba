@@ -57,6 +57,10 @@ class EShinbuCore(CommonCore):
         edit_pin = None
         while True:
             retry = retry + 1
+            change_image = self.WaitPageSteady('change-image', By.ID)
+            change_image.click()
+            time.sleep(2)
+
             image_element = self.WaitPageSteady('cakecaptcha')
             self.get_captcha(image_element, "captcha.png")
             image = Image.open("captcha.png")
