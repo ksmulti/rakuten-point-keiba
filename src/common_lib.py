@@ -4,8 +4,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.utils import ChromeType
+# from webdriver_manager.utils import ChromeType
 import random
 import time
 import os
@@ -23,15 +24,8 @@ class CommonCore:
         chop = webdriver.ChromeOptions()
         chop.add_argument("--no-sandbox")
         chop.add_argument("--disable-setuid-sandbox")
-        if os.name == 'nt':
-            self._browser = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chop)    #open chrome browser
-        else:
-            chop.add_argument('--headless')
-            chop.add_argument("--remote-debugging-port=9222")
-            chop.add_argument("--single-process")
-            self._browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=chop)    #open chrome browser
-        
-        self._delay = 10
+        self._browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), chrome_options=chop)    #open chrome browser        
+        self._delay = 20
         self._settings = self.LoadSettings()
         self._main_window_handle = self._browser.current_window_handle
 
@@ -79,6 +73,9 @@ class CommonCore:
                     signin_window_handle = handle
                     break
         self._browser.switch_to.window(signin_window_handle)
+
+    def SwitchToMainWindow(self):
+        self._browser.switch_to.window(self._main_window_handle)
 
     def get_captcha(self, element, path):
         # now that we have the preliminary stuff out of the way time to get that image :D
